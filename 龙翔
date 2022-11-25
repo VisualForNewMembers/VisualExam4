@@ -1,0 +1,31 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+
+int main() {
+	ifstream ifs;
+
+	ifs.open("data.hex", ios::in );
+	if (!ifs.is_open()) {
+		cout << "文件打开失败" << endl;
+		return 0;
+	}
+	int b = 0;
+	int c;
+	char buf[1024];
+	while (ifs >> buf) { ; }
+	for (int a = 0; a < 1024; a++) {
+		if (buf[a] == char(0xa7)) {
+			b++;
+			c = (uint32_t)buf[a + 2];
+			
+		}
+	}
+	cout << "一共有" << b << "条数据" << endl;
+	cout << "数据内容是:  " << c << endl;
+
+	ifs.close();
+	system("pause");
+	return 0;
+}
